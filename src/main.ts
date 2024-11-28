@@ -8,17 +8,17 @@ async function bootstrap() {
     const port = configService.getValue('PORT') || 8000;
     const app = await NestFactory.create(AppModule);
 
-    app.setGlobalPrefix('my-nest-template');
+    app.setGlobalPrefix('api');
     app.useGlobalInterceptors(new TransformResponseInterceptor());
 
     const swaggerConfig = new DocumentBuilder()
-        .setTitle('my-nestjs-template')
-        .setDescription('My Nest Template API')
-        .setVersion('1.0')
+        .setTitle('projtracktor API')
+        .setDescription('projtracktor REST API')
+        .setVersion('0.1')
         .build();
 
     const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-    SwaggerModule.setup('/api', app, swaggerDocument, {
+    SwaggerModule.setup('/docs', app, swaggerDocument, {
         useGlobalPrefix: true,
     });
 
