@@ -22,6 +22,10 @@ export class ProjectService {
     }
 
     async updateProject(id: string, data: UpdateProjectDto) {
-        return await this.projectRepository.update(data, { id });
+        const updateResult = await this.projectRepository.update(data, { id });
+        return {
+            project: updateResult.raw,
+            updated: !!updateResult.affected,
+        };
     }
 }
