@@ -1,3 +1,4 @@
+import { ProjectEntity } from '@/domain/entities/project.entity';
 import { TaskPriority } from '@/domain/enums/task-priority.enum';
 import {
     IsBoolean,
@@ -6,6 +7,7 @@ import {
     IsNotEmpty,
     IsOptional,
     IsString,
+    IsUUID,
 } from 'class-validator';
 
 export class CreateTaskDto {
@@ -27,4 +29,10 @@ export class CreateTaskDto {
     @IsNotEmpty()
     @IsEnum(TaskPriority, { each: true })
     priority: TaskPriority;
+
+    @IsDefined()
+    @IsNotEmpty()
+    @IsString()
+    @IsUUID()
+    projectId: ProjectEntity['id']
 }

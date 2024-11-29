@@ -45,4 +45,9 @@ export class ProjectController {
     async deleteProject(@Param('id') id: string) {
         return await this.projectService.deleteProject(id);
     }
+
+    @Get('/:id/tasks')
+    async getProjectTasks(@Param('id') id: string) {
+        return await this.projectService.getProjectTasks(id);
+    }
 }

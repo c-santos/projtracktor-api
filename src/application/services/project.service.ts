@@ -31,6 +31,11 @@ export class ProjectService {
     }
 
     async deleteProject(id: string) {
-        return await this.projectRepository.delete(id)
+        return await this.projectRepository.delete(id);
+    }
+
+    async getProjectTasks(id: string) {
+        const tasks = await this.projectRepository.getProjectTasks(id);
+        return tasks
     }
 }
