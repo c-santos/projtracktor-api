@@ -16,4 +16,9 @@ export class ProjectRepository
             'projects',
         );
     }
+
+    async delete(id: string): Promise<boolean> {
+        const result = await this.repository.delete({ id: id });
+        return !!result.affected;
+    }
 }

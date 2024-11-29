@@ -1,5 +1,14 @@
 import { ProjectService } from '@/application/services/project.service';
-import { Body, Controller, Get, Inject, Param, Patch, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Inject,
+    Param,
+    Patch,
+    Post,
+} from '@nestjs/common';
 import { CreateProjectDto } from '../dtos/create-project.dto';
 import { UpdateProjectDto } from '../dtos/update-project.dto';
 
@@ -25,7 +34,15 @@ export class ProjectController {
     }
 
     @Patch('/:id')
-    async updateProject(@Param('id') id: string, @Body() data: UpdateProjectDto) {
-        return await this.projectService.updateProject(id, data)
+    async updateProject(
+        @Param('id') id: string,
+        @Body() data: UpdateProjectDto,
+    ) {
+        return await this.projectService.updateProject(id, data);
+    }
+
+    @Delete('/:id')
+    async deleteProject(@Param('id') id: string) {
+        return await this.projectService.deleteProject(id);
     }
 }

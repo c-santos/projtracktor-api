@@ -23,9 +23,14 @@ export class ProjectService {
 
     async updateProject(id: string, data: UpdateProjectDto) {
         const updateResult = await this.projectRepository.update(data, { id });
+
         return {
             project: updateResult.raw,
             updated: !!updateResult.affected,
         };
+    }
+
+    async deleteProject(id: string) {
+        return await this.projectRepository.delete(id)
     }
 }
