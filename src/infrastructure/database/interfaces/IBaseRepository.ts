@@ -1,4 +1,4 @@
-import { QueryRunner } from 'typeorm';
+import { QueryRunner, UpdateResult } from 'typeorm';
 import { FindOptions } from '../types/find-options.type';
 import { QueryOptions } from '../types/query-options.type';
 
@@ -12,7 +12,7 @@ export abstract class IBaseRepository<Entity> {
         data: Partial<Entity>,
         where?: FindOptions<Entity> | string,
         queryRunner?: QueryRunner,
-    ): Promise<boolean>;
+    ): Promise<UpdateResult>;
     abstract findOne(queryOptions?: QueryOptions<Entity>): Promise<Entity>;
     abstract count(queryOptions?: QueryOptions<Entity>): Promise<number>;
 }

@@ -17,6 +17,6 @@ export class Project extends BaseModel implements ProjectEntity {
     @Column({ type: 'boolean' })
     completed: boolean;
 
-    @OneToMany(() => Task, (task) => task.id)
+    @OneToMany(() => Task, (task) => task.projectId)
     tasks: Task[];
 }

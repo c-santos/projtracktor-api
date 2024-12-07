@@ -1,4 +1,4 @@
-import { Entity, QueryRunner, Repository } from 'typeorm';
+import { Entity, QueryRunner, Repository, UpdateResult } from 'typeorm';
 import { FindOptions } from '../types/find-options.type';
 import { applyWhereConditions } from './utils/applyWhereConditions';
 import { QueryOptions } from '../types/query-options.type';
@@ -106,13 +106,11 @@ export abstract class BaseRepository<
         data: Partial<Entity>,
         where?: FindOptions<Entity> | string,
         queryRunner?: QueryRunner,
-    ): Promise<boolean> {
+    ): Promise<UpdateResult> {
         const databaseModelData = plainToInstance(this._model, data);
         const queryBuilder = queryRunner
             ? this.repository.createQueryBuilder(this.tableAlias, queryRunner)
             : this.repository.createQueryBuilder(this.tableAlias);
-
-        queryBuilder.update(this._model).set(databaseModelData);
 
         if (where) {
             applyWhereConditions<Entity, DatabaseModel>(
@@ -122,9 +120,15 @@ export abstract class BaseRepository<
             );
         }
 
-        const result = await queryBuilder.execute();
+        const result = await queryBuilder
+            .update()
+            .set(databaseModelData)
+            .returning('*')
+            .execute();
 
-        return !!result.affected;
+        console.log('Update result: ', result)
+
+        return result;
     }
 
     async findOne(queryOptions?: QueryOptions<Entity>): Promise<Entity> {

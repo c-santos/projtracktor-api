@@ -12,5 +12,9 @@ export class TaskRepository
     constructor(@InjectRepository(Task) repository: Repository<Task>) {
         super({ entity: TaskEntity, model: Task }, repository, 'tasks');
     }
-}
 
+    async delete(id: string): Promise<boolean> {
+        const result = await this.repository.delete({ id });
+        return !!result.affected;
+    }
+}
