@@ -66,4 +66,9 @@ export class ProjectController {
     ) {
         return await this.projectService.updateTask(id, taskId, data);
     }
+
+    @Delete('/:id/tasks/:taskId')
+    async deleteTask(@Param('id') id: string, @Param('taskId') taskId: string) {
+        return await this.projectService.deleteTask(id, taskId);
+    }
 }

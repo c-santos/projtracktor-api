@@ -66,4 +66,8 @@ export class ProjectService {
             updated: !!updateResult.affected,
         };
     }
+
+    async deleteTask(id: string, taskId: string) {
+        return await this.taskRepository.delete(taskId);
+    }
 }
