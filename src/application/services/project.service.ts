@@ -37,7 +37,7 @@ export class ProjectService {
         return await this.projectRepository.delete(id);
     }
 
-    async getProjectTasks(id: string) {
+    async getTasks(id: string) {
         const tasks = await this.taskRepository.findAll({
             where: { projectId: id },
         });

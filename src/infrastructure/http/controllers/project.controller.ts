@@ -47,7 +47,7 @@ export class ProjectController {
     }
 
     @Get('/:id/tasks')
-    async getProjectTasks(@Param('id') id: string) {
-        return await this.projectService.getProjectTasks(id);
+    async getTasks(@Param('id') id: string) {
+        return await this.projectService.getTasks(id);
     }
 }
