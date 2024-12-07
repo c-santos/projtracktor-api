@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { CreateProjectDto } from '../dtos/create-project.dto';
 import { UpdateProjectDto } from '../dtos/update-project.dto';
+import { CreateTaskDto } from '../dtos/create-task.dto';
 
 @Controller('projects')
 export class ProjectController {
@@ -49,5 +50,10 @@ export class ProjectController {
     @Get('/:id/tasks')
     async getTasks(@Param('id') id: string) {
         return await this.projectService.getTasks(id);
+    }
+
+    @Post('/:id/tasks')
+    async createTask(@Param('id') id: string, @Body() data: CreateTaskDto) {
+        return await this.projectService.createTask(id, data);
     }
 }
