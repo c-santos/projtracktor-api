@@ -1,4 +1,5 @@
 import { IProjectRepository } from '@/domain/interfaces/IProjectRepository';
+import { ITaskRepository } from '@/domain/interfaces/ITaskRepository';
 import { CreateProjectDto } from '@/infrastructure/http/dtos/create-project.dto';
 import { UpdateProjectDto } from '@/infrastructure/http/dtos/update-project.dto';
 import { Inject } from '@nestjs/common';
@@ -7,6 +8,8 @@ export class ProjectService {
     constructor(
         @Inject(IProjectRepository)
         private readonly projectRepository: IProjectRepository,
+        @Inject(ITaskRepository)
+        private readonly taskRepository: ITaskRepository,
     ) {}
 
     async getAllProjects() {
@@ -35,7 +38,10 @@ export class ProjectService {
     }
 
     async getProjectTasks(id: string) {
-        const tasks = await this.projectRepository.getProjectTasks(id);
-        return tasks
+        const tasks = await this.taskRepository.findAll({
+            where: { projectId: id },
+        });
+
+        return tasks;
     }
 }

@@ -16,6 +16,6 @@ import { Task } from '../database/models/task.model';
         TaskService,
     ],
     controllers: [TaskController],
-    exports: [],
+    exports: [ITaskRepository],
 })
 export class TaskModule {}

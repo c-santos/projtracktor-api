@@ -23,13 +23,13 @@ export class ProjectRepository
         return !!result.affected;
     }
 
-    async getProjectTasks(id: string): Promise<TaskEntity[]> {
+    async getTasks(id: string): Promise<TaskEntity[]> {
         const project = await this.repository.findOne({
             where: { id },
             relations: { tasks: true },
         });
 
-        console.log('[projectRepository.getProjectTasks] result: ', project);
+        if (!project) return []
 
         return project.tasks.map((task) => TaskEntity.create(task));
     }
