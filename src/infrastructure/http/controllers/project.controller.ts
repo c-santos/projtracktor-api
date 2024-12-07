@@ -12,6 +12,7 @@ import {
 import { CreateProjectDto } from '../dtos/create-project.dto';
 import { UpdateProjectDto } from '../dtos/update-project.dto';
 import { CreateTaskDto } from '../dtos/create-task.dto';
+import { UpdateTaskDto } from '../dtos/update-task.dto';
 
 @Controller('projects')
 export class ProjectController {
@@ -55,5 +56,14 @@ export class ProjectController {
     @Post('/:id/tasks')
     async createTask(@Param('id') id: string, @Body() data: CreateTaskDto) {
         return await this.projectService.createTask(id, data);
+    }
+
+    @Patch('/:id/task/:taskId')
+    async updateTask(
+        @Param('id') id: string,
+        @Param('taskId') taskId: string,
+        @Body() data: UpdateTaskDto,
+    ) {
+        return await this.projectService.updateTask(id, taskId, data);
     }
 }

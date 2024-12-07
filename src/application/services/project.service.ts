@@ -1,8 +1,9 @@
 import { IProjectRepository } from '@/domain/interfaces/IProjectRepository';
 import { ITaskRepository } from '@/domain/interfaces/ITaskRepository';
 import { CreateProjectDto } from '@/infrastructure/http/dtos/create-project.dto';
-import { CreateTaskDto } from '@/infrastructure/http/dtos/create-task.dto';
 import { UpdateProjectDto } from '@/infrastructure/http/dtos/update-project.dto';
+import { CreateTaskDto } from '@/infrastructure/http/dtos/create-task.dto';
+import { UpdateTaskDto } from '@/infrastructure/http/dtos/update-task.dto';
 import { Inject } from '@nestjs/common';
 
 export class ProjectService {
@@ -45,7 +46,6 @@ export class ProjectService {
 
         return tasks;
     }
-
     async createTask(id: string, data: CreateTaskDto) {
         const task = await this.taskRepository.create({
             ...data,
@@ -53,5 +53,17 @@ export class ProjectService {
         });
 
         return task;
+    }
+
+    async updateTask(id: string, taskId: string, data: UpdateTaskDto) {
+        const updateResult = await this.taskRepository.update(data, {
+            projectId: id,
+            id: taskId,
+        });
+
+        return {
+            task: updateResult.raw,
+            updated: !!updateResult.affected,
+        };
     }
 }
