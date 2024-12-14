@@ -1,4 +1,3 @@
-import { TaskEntity } from '@/domain/entities/task.entity';
 import { BaseModel } from './base.model';
 import {
     Column,
@@ -14,7 +13,7 @@ import { ProjectEntity } from '@/domain/entities/project.entity';
 import { TaskTag } from './task-tag.model';
 
 @Entity('tasks')
-export class Task extends BaseModel implements TaskEntity {
+export class Task extends BaseModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

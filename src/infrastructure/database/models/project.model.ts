@@ -1,11 +1,10 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseModel } from './base.model';
-import { ProjectEntity } from '@/domain/entities/project.entity';
 import { Task } from './task.model';
 import { ProjectTag } from './project-tag.model';
 
 @Entity('projects')
-export class Project extends BaseModel implements ProjectEntity {
+export class Project extends BaseModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
