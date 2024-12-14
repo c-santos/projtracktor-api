@@ -1,4 +1,4 @@
-import { TagEntity } from './tag.entity';
+import { TagEntity } from './project-tag.entity';
 import { TaskEntity } from './task.entity';
 
 export class ProjectEntity {
