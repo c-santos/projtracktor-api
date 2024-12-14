@@ -1,3 +1,4 @@
+import { TagEntity } from './tag.entity';
 import { TaskEntity } from './task.entity';
 
 export class ProjectEntity {
@@ -9,6 +10,7 @@ export class ProjectEntity {
     updatedAt: Date;
 
     tasks?: TaskEntity[];
+    tags?: TagEntity[];
 
     constructor(data: Partial<ProjectEntity>) {
         Object.assign(this, data);
