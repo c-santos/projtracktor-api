@@ -6,6 +6,7 @@ import { dbConfig } from '../config/typeorm.config';
 import { UserModule } from './user.module';
 import { ProjectModule } from './project.module';
 import { TaskModule } from './task.module';
+import { TagController } from '../http/controllers/tag.controller';
 
 @Module({
     imports: [
@@ -14,7 +15,8 @@ import { TaskModule } from './task.module';
         }),
         UserModule,
         ProjectModule,
-        TaskModule
+        TaskModule,
+        TagController
     ],
     controllers: [AppController],
     providers: [AppService],
