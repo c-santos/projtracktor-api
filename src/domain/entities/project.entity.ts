@@ -1,4 +1,4 @@
-import { TagEntity } from './project-tag.entity';
+import { ProjectTagEntity } from './project-tag.entity';
 import { TaskEntity } from './task.entity';
 
 export class ProjectEntity {
@@ -10,7 +10,7 @@ export class ProjectEntity {
     updatedAt: Date;
 
     tasks?: TaskEntity[];
-    tags?: TagEntity[];
+    tags?: ProjectTagEntity[];
 
     constructor(data: Partial<ProjectEntity>) {
         Object.assign(this, data);
