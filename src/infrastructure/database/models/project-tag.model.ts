@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseModel } from './base.model';
 import { Project } from './project.model';
 
@@ -10,7 +10,6 @@ export class ProjectTag extends BaseModel {
     @Column()
     name: string;
 
-    @PrimaryColumn({ name: 'project_id' })
     @ManyToOne(() => Project, (project) => project.id, {
         cascade: true,
     })

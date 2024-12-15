@@ -3,7 +3,6 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
-    PrimaryColumn,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { BaseModel } from './base.model';
@@ -17,7 +16,6 @@ export class TaskTag extends BaseModel {
     @Column()
     name: string;
 
-    @PrimaryColumn({ name: 'task_id' })
     @ManyToOne(() => Task, (task) => task.id, {
         cascade: true,
     })
