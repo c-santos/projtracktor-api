@@ -1,6 +1,6 @@
 import { TaskPriority } from '../enums/task-priority.enum';
 import { ProjectEntity } from './project.entity';
-import { TaskTagEntity } from './task-tag.entity';
+import { TagEntity } from './tag.entity';
 
 export class TaskEntity {
     id: string;
@@ -10,7 +10,7 @@ export class TaskEntity {
     priority: TaskPriority;
 
     projectId: ProjectEntity['id'];
-    tags: TaskTagEntity[];
+    tags: TagEntity[];
 
     private constructor(data: Partial<TaskEntity>) {
         Object.assign(this, data);

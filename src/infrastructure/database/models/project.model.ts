@@ -1,7 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseModel } from './base.model';
 import { Task } from './task.model';
-import { ProjectTag } from './project-tag.model';
+import { Tag } from './tag.model';
 
 @Entity('projects')
 export class Project extends BaseModel {
@@ -20,6 +27,17 @@ export class Project extends BaseModel {
     @OneToMany(() => Task, (task) => task.projectId)
     tasks: Task[];
 
-    @OneToMany(() => ProjectTag, (tag) => tag.projectId)
-    tags: ProjectTag[];
+    @ManyToMany(() => Tag, (tag) => tag.projects)
+    @JoinTable({
+        joinColumn: {
+            name: 'project',
+            referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+            name: 'tag',
+            referencedColumnName: 'id',
+        },
+        name: 'project_tags',
+    })
+    tags: Tag[];
 }

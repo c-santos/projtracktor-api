@@ -2,15 +2,16 @@ import { BaseModel } from './base.model';
 import {
     Column,
     JoinColumn,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Entity } from 'typeorm';
 import { TaskPriority } from '@/domain/enums/task-priority.enum';
 import { Project } from './project.model';
 import { ProjectEntity } from '@/domain/entities/project.entity';
-import { TaskTag } from './task-tag.model';
+import { Tag } from './tag.model';
 
 @Entity('tasks')
 export class Task extends BaseModel {
@@ -33,6 +34,17 @@ export class Task extends BaseModel {
     @JoinColumn({ name: 'project_id', referencedColumnName: 'id' })
     projectId: ProjectEntity['id'];
 
-    @OneToMany(() => TaskTag, (taskTag) => taskTag.taskId)
-    tags: TaskTag[];
+    @ManyToMany(() => Tag, (tag) => tag.tasks)
+    @JoinTable({
+        joinColumn: {
+            name: 'task',
+            referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+            name: 'tag',
+            referencedColumnName: 'id',
+        },
+        name: 'task_tags',
+    })
+    tags: Tag[];
 }
