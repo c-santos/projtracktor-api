@@ -1,19 +1,15 @@
 import { BaseRepository } from './base.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TaskTagEntity } from '@/domain/entities/task-tag.entity';
-import { TaskTag } from '../models/task-tag.model';
-import { ITaskTagRepository } from '@/domain/interfaces/ITaskTagRepository';
+import { ITagRepository } from '@/domain/interfaces/ITagRepository';
+import { TagEntity } from '@/domain/entities/tag.entity';
+import { Tag } from '../models/tag.model';
 
 export class TaskTagRepository
-    extends BaseRepository<TaskTagEntity, TaskTag>
-    implements ITaskTagRepository
+    extends BaseRepository<TagEntity, Tag>
+    implements ITagRepository
 {
-    constructor(@InjectRepository(TaskTag) repository: Repository<TaskTag>) {
-        super(
-            { entity: TaskTagEntity, model: TaskTag },
-            repository,
-            'task_tags'
-        );
+    constructor(@InjectRepository(Tag) repository: Repository<Tag>) {
+        super({ entity: TagEntity, model: Tag }, repository, 'task_tags');
     }
 }
