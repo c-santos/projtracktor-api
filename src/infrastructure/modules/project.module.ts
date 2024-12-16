@@ -6,9 +6,10 @@ import { IProjectRepository } from '@/domain/interfaces/IProjectRepository';
 import { ProjectService } from '@/application/services/project.service';
 import { ProjectController } from '../http/controllers/project.controller';
 import { TaskModule } from './task.module';
+import { TagModule } from './tag.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Project]), TaskModule],
+    imports: [TypeOrmModule.forFeature([Project]), TaskModule, TagModule],
     providers: [
         {
             provide: IProjectRepository,

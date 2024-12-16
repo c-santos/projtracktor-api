@@ -6,13 +6,8 @@ import { Inject } from '@nestjs/common';
 export class TagController {
     constructor(@Inject(TagService) private tagService: TagService) {}
 
-    @Get('tasks')
+    @Get('')
     async getAllTaskTags() {
-        return await this.tagService.getAllTaskTags();
-    }
-
-    @Get('projects')
-    async getAllProjectTags() {
-        return await this.tagService.getAllProjectTags();
+        return await this.tagService.getAllTags();
     }
 }

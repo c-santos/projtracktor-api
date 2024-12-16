@@ -5,9 +5,10 @@ import { TaskRepository } from '@/infrastructure/database/repositories/task.repo
 import { ITaskRepository } from '@/domain/interfaces/ITaskRepository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from '../database/models/task.model';
+import { TagModule } from './tag.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Task])],
+    imports: [TypeOrmModule.forFeature([Task]), TagModule],
     providers: [
         {
             provide: ITaskRepository,
