@@ -13,11 +13,13 @@ import { CreateProjectDto } from '../dtos/create-project.dto';
 import { UpdateProjectDto } from '../dtos/update-project.dto';
 import { CreateTaskDto } from '../dtos/create-task.dto';
 import { UpdateTaskDto } from '../dtos/update-task.dto';
+import { TagService } from '@/application/services/tag.service';
 
 @Controller('projects')
 export class ProjectController {
     constructor(
         @Inject(ProjectService) private readonly projectService: ProjectService,
+        @Inject(TagService) private readonly tagService: TagService,
     ) {}
 
     @Get()
@@ -70,5 +72,10 @@ export class ProjectController {
     @Delete('/:id/tasks/:taskId')
     async deleteTask(@Param('id') id: string, @Param('taskId') taskId: string) {
         return await this.projectService.deleteTask(id, taskId);
+    }
+
+    @Get(':id/tags')
+    async getProjectTags(@Param('id') id: string) {
+        return await this.tagService.getProjectTags(id);
     }
 }
