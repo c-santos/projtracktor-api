@@ -10,10 +10,14 @@ import {
 import { TaskService } from '@/application/services/task.service';
 import { Inject } from '@nestjs/common';
 import { CreateTaskDto } from '../dtos/create-task.dto';
+import { TagService } from '@/application/services/tag.service';
 
 @Controller('tasks')
 export class TaskController {
-    constructor(@Inject(TaskService) private taskService: TaskService) {}
+    constructor(
+        @Inject(TaskService) private taskService: TaskService,
+        @Inject(TagService) private tagService: TagService,
+    ) {}
 
     @Get()
     async getAllTasks() {
@@ -38,5 +42,10 @@ export class TaskController {
     @Delete('/:id')
     async deleteTask(@Param('id') id: string) {
         return await this.taskService.deleteTask(id);
+    }
+
+    @Get(':id/tags')
+    async getTaskTags(@Param('id') id: string) {
+        return await this.tagService.getTaskTags(id);
     }
 }
