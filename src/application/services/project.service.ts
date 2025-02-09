@@ -23,7 +23,8 @@ export class ProjectService {
     }
 
     async createProject(data: CreateProjectDto) {
-        return await this.projectRepository.create(data);
+        const newProject = { ...data, completed: false };
+        return await this.projectRepository.create(newProject);
     }
 
     async updateProject(id: string, data: UpdateProjectDto) {
