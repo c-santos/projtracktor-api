@@ -41,9 +41,7 @@ export class ProjectService {
     }
 
     async getTasks(id: string) {
-        const tasks = await this.taskRepository.findAll({
-            where: { projectId: id },
-        });
+        const tasks = await this.taskRepository.getProjectTasks(id);
 
         return tasks;
     }

@@ -17,4 +17,13 @@ export class TaskRepository
         const result = await this.repository.delete({ id });
         return !!result.affected;
     }
+
+    async getProjectTasks(projectId: string): Promise<TaskEntity[]> {
+        const tasks = await this.repository
+            .createQueryBuilder('tasks')
+            .where('tasks.project_id = :projectId', { projectId })
+            .getMany();
+
+        return tasks.map((task) => TaskEntity.create(task));
+    }
 }
