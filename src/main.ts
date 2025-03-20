@@ -22,6 +22,8 @@ async function bootstrap() {
         useGlobalPrefix: true,
     });
 
+    app.enableCors();
+
     await app.listen(port);
 }
 
