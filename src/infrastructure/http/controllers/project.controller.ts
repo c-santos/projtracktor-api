@@ -8,6 +8,7 @@ import {
     Param,
     Patch,
     Post,
+    Query,
 } from '@nestjs/common';
 import { CreateProjectDto } from '../dtos/create-project.dto';
 import { UpdateProjectDto } from '../dtos/update-project.dto';
@@ -49,8 +50,17 @@ export class ProjectController {
     }
 
     @Get('/:id/tasks')
-    async getTasks(@Param('id') id: string) {
-        return await this.projectService.getTasks(id);
+    async getTasks(
+        @Param('id') id: string,
+        @Query()
+        parameters?: {
+            sortBy?: string;
+            sortOrder?: 'DESC' | 'ASC';
+            searchBy?: string;
+            searchValue?: string;
+        },
+    ) {
+        return await this.projectService.getTasks(id, parameters);
     }
 
     @Post('/:id/tasks')

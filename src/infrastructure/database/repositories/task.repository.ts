@@ -18,11 +18,34 @@ export class TaskRepository
         return !!result.affected;
     }
 
-    async getProjectTasks(projectId: string): Promise<TaskEntity[]> {
-        const tasks = await this.repository
+    async getProjectTasks(
+        projectId: string,
+        parameters?: {
+            sortBy?: string;
+            sortOrder?: 'DESC' | 'ASC';
+            searchBy?: string;
+            searchValue?: string;
+        },
+    ): Promise<TaskEntity[]> {
+        const { sortOrder, sortBy, searchValue, searchBy } = parameters;
+        console.log('searchBy: ', searchBy);
+        console.log('searchValue: ', searchValue);
+
+        const qb = this.repository
             .createQueryBuilder('tasks')
-            .where('tasks.project_id = :projectId', { projectId })
-            .getMany();
+            .where('tasks.project_id = :projectId', { projectId });
+
+        if (sortBy && sortOrder) {
+            qb.orderBy(sortBy, sortOrder);
+        }
+
+        if (searchBy && searchValue) {
+            qb.andWhere(`tasks.${searchBy} ILIKE :searchValue`, {
+                searchValue: `%${searchValue}%`,
+            });
+        }
+
+        const tasks = await qb.getMany();
 
         return tasks.map((task) => TaskEntity.create(task));
     }

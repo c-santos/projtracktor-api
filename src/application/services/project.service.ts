@@ -40,8 +40,16 @@ export class ProjectService {
         return await this.projectRepository.delete(id);
     }
 
-    async getTasks(id: string) {
-        const tasks = await this.taskRepository.getProjectTasks(id);
+    async getTasks(
+        id: string,
+        parameters: {
+            sortBy?: string,
+            sortOrder?: 'DESC' | 'ASC',
+            searchBy?: string,
+            searchValue?: string,
+        }
+    ) {
+        const tasks = await this.taskRepository.getProjectTasks(id, parameters);
 
         return tasks;
     }
