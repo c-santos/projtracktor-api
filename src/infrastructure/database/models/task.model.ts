@@ -20,7 +20,12 @@ export class Task extends BaseModel implements TaskEntity {
     @Column({ type: 'boolean', default: true, nullable: false })
     completed: boolean;
 
-    @Column({ type: 'enum', enum: TaskPriority, nullable: true })
+    @Column({
+        type: 'enum',
+        enum: TaskPriority,
+        nullable: false,
+        default: TaskPriority.NONE,
+    })
     priority: TaskPriority;
 
     @ManyToOne(() => Project, (proj) => proj.tasks)

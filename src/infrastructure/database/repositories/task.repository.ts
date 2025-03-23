@@ -36,8 +36,10 @@ export class TaskRepository
             .where('tasks.project_id = :projectId', { projectId })
             .loadAllRelationIds();
 
+        qb.orderBy('completed', 'ASC');
+
         if (sortBy && sortOrder) {
-            qb.orderBy(sortBy, sortOrder);
+            qb.addOrderBy(sortBy, sortOrder);
         }
 
         if (searchBy && searchValue) {
