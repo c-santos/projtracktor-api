@@ -33,7 +33,8 @@ export class TaskRepository
 
         const qb = this.repository
             .createQueryBuilder('tasks')
-            .where('tasks.project_id = :projectId', { projectId });
+            .where('tasks.project_id = :projectId', { projectId })
+            .loadAllRelationIds();
 
         if (sortBy && sortOrder) {
             qb.orderBy(sortBy, sortOrder);
