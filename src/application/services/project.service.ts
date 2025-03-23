@@ -64,7 +64,6 @@ export class ProjectService {
 
     async updateTask(id: string, taskId: string, data: UpdateTaskDto) {
         const updateResult = await this.taskRepository.update(data, {
-            projectId: id,
             id: taskId,
         });
 
