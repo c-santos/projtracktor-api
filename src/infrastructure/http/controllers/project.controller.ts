@@ -68,7 +68,7 @@ export class ProjectController {
         return await this.projectService.createTask(id, data);
     }
 
-    @Patch('/:id/task/:taskId')
+    @Patch('/:id/tasks/:taskId')
     async updateTask(
         @Param('id') id: string,
         @Param('taskId') taskId: string,
